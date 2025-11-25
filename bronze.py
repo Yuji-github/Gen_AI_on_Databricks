@@ -22,9 +22,8 @@ def set_prompt_in_bronze_table(user_prompt: str) -> None:
         ["prompt_text"]
     ).withColumn("ingestion_timestamp", current_timestamp())
 
-    # Write the DataFrame to the Bronze Delta table (raw)
+    # Write the DataFrame to the Bronze Delta tables
     prompt_df.write \
         .format("delta") \
         .mode("append") \
         .save(bronze_table_path)
-    
